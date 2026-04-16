@@ -4,15 +4,6 @@ WORKDIR /app
 
 COPY . .
 
-# 🔥 Fix permission issue
-RUN chmod +x mvn
+RUN chmod +x mvnw && ./mvnw clean package -DskipTests
 
-# Build jar
-RUN ./mvn clean package -DskipTests
-
-# Rename jar
-RUN mv target/*.jar app.jar
-
-EXPOSE 8080
-
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "target/backend_emp_mng_sys-1-0.0.1-SNAPSHOT.jar"]
