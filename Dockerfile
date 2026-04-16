@@ -4,8 +4,13 @@ WORKDIR /app
 
 COPY . .
 
-RUN ./mvnw clean package -DskipTests
+# 🔥 Fix permission issue
+RUN chmod +x mvn
 
+# Build jar
+RUN ./mvn clean package -DskipTests
+
+# Rename jar
 RUN mv target/*.jar app.jar
 
 EXPOSE 8080
